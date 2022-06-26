@@ -2,13 +2,13 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHu
 
 wait(1)
 
-HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loading. Please wait!","rbxassetid://78840618","5515669992")
+HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loading. Please wait!","rbxassetid://2869102480","5515669992")
 
-wait(4)
+wait(1.8)
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/Greenville/GVAUTOREFUEL.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/Greenville/GVAUTOWASH.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/Greenville/GVSPEEDMOD.lua"))()
 
-HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loaded, Enjoy!","rbxassetid://78840618","9067086414")
+HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loaded, Enjoy!","rbxassetid://4914902918","9067086414")
 
