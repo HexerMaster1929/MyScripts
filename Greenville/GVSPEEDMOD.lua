@@ -9,7 +9,7 @@ _, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 -- Fix If Sitting Make Car Go BRRRRRRRR
 
 local character = game.Players.LocalPlayer.Character
-local humanoid = character:WaitForChild("Humanoid")
+local humanoid = character.Humanoid
  
 function onSeated(isSeated, seat)
 	if isSeated then
