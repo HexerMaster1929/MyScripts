@@ -1,6 +1,6 @@
 
 
-if game.PlaceId == 891852901 then
+
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHub/main/UI/Notification%20(Public%20For%20Exploit%20Makers).lua"))()
 
@@ -16,4 +16,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScr
 
 HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loaded, Enjoy!","rbxassetid://4914902918","9067086414")
 
-end
+
