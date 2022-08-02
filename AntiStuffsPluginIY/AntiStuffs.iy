@@ -1,0 +1,28 @@
+local commands = {}
+
+commands["AntiFling"] = {
+    ["ListName"] = "AntiFling",
+    ["Description"] = "Enables Antifling",
+    ["Aliases"] = {"AntiFling"},
+    ["Function"] = function(args, speaker)
+    
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/AntiStuffsPluginIY/Antifling.lua"))()
+    end
+}
+
+commands["AntiKill"] = {
+    ["ListName"] = "AntiKill",
+    ["Description"] = "Enables AntiKill",
+    ["Aliases"] = {"AntiKill"},
+    ["Function"] = function(args, speaker)
+    
+loadstring(game:HttpGet("https://github.com/HexerMaster1929/MyScripts/blob/main/AntiStuffsPluginIY/Antikill.lua"))()
+    end
+}
+
+
+return {
+    ["PluginName"] = "AntiStuffs",
+    ["PluginDescription"] = "Antifling, Antikill. Made By Mrolivesgaming",
+    ["Commands"] = commands
+}
