@@ -1,12 +1,11 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHub/main/UI/CustomExploitNotif%20(Cleaner%20UI).lua"))()
+
 spawn (function()
         _G.STOP = true -- disable
         wait(1)
         _G.STOP = false -- enable
          
-        game:service'StarterGui':SetCore("SendNotification",{
-            Title = "Enabled AntiTool";
-            Text = "By Synttax";
-        });
+        HexNotification("IY Antikill","Antikill Loaded, Enjoy!","0","9067086414")
          
         local off = false
         local cf,pos
@@ -29,10 +28,7 @@ spawn (function()
                 tools[ob] = true
                 sotp = true
                 ob.Parent = game:service'Players'.LocalPlayer.Backpack
-                game:service'StarterGui':SetCore("SendNotification",{
-                    Title = "Overflow";
-                    Text = "Someone attempted to kill/Claim you."
-                });
+                 HexNotification("IY Antikill","Someone Attempted To Kill you!","0","5515669992")
                 for i = 1,10 do
                     if game:service'Players'.LocalPlayer.Character and game:service'Players'.LocalPlayer.Character:findFirstChild'HumanoidRootPart' then
                         game:service'Players'.LocalPlayer.Character.HumanoidRootPart.CFrame = cf
