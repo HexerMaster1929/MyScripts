@@ -8,7 +8,7 @@ wait(1)
 
 HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loading. Please wait!","rbxassetid://2869102480","5515669992")
 
-wait(0.9)
+wait(0.3)
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/Greenville/GVAUTOREFUEL.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/Greenville/GVAUTOWASH.lua"))()
