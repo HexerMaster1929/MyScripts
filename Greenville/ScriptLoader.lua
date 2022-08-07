@@ -2,7 +2,7 @@
 
 
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHub/main/UI/Notification%20(Public%20For%20Exploit%20Makers).lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHub/main/UI/CustomExploitNotif%20(Cleaner%20UI).lua"))()
 
 wait(1)
 
