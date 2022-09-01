@@ -2,11 +2,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHu
 
 HexNotification("HexHub","Loading Fonts (May Take a While) ","rbxassetid://10780606226","904856168")
 
-wait(math.random(2,15))
+wait(math.random(2,7))
 
 settings = {
 	FontDirectory = game.Players.LocalPlayer.PlayerGui;
-	FontType = "FredokaOne"
+	FontType = ""
 }
 
 local TextObjects = {}
