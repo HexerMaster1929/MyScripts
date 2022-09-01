@@ -9,18 +9,23 @@ settings = {
 	FontType = "FredokaOne"
 }
 
-function ChangeFont()
-	for i,G in pairs(settings.FontDirectory:GetChildren()) do
-		if G:IsA("ScreenGui") then
-			for i,GC in pairs(G:GetChildren()) do
-				if GC:IsA("TextLabel") or GC:IsA("TextBox") or GC:IsA("TextButton") then
-					GC.Font = settings.FontType
-				end
-			end
+local TextObjects = {}
+
+
+function CheckChildren(obj)
+	for i, GC in pairs(obj:GetChildren()) do
+		if GC:IsA("TextLabel") or GC:IsA("TextBox") or GC:IsA("TextButton") then
+			table.insert(TextObjects,GC)
 		end
+		CheckChildren(GC)
 	end
-	HexNotification("Changed Fonts","Changed Fonts To "..settings.FontType,"rbxassetid://10780606244","904856168")
 end
+
+
+
+
+
+
 
 -------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +56,14 @@ FontSection:NewDropdown("Font", "Selected Font", {"Legacy", "Arial", "SourceSans
 end)
 
 FontSection:NewButton("Apply Fonts", "Applies Fonts", function()
-	ChangeFont()
+
+CheckChildren(settings.FontDirectory)
+
+	for i = 1, #TextObjects do
+		TextObjects[i].Font = settings.FontType
+		end
+		HexNotification("Changed Fonts","Changed Fonts To "..settings.FontType,"rbxassetid://10780606244","904856168")
+		
 end)
 
 HexNotification("HexHub","Hexhub Loaded! Enjoy!","rbxassetid://10780606244","904856168")
