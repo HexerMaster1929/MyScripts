@@ -1,12 +1,11 @@
 
 
 
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHub/main/UI/Notification%20(Public%20For%20Exploit%20Makers).lua"))()
+local Lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/HexHub/main/UI/NewUI.lua"))()
 
 wait(1)
 
-HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loading. Please wait!","rbxassetid://10507208348","5515669992")
+Lib:MakeNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loading. Please wait!","rbxassetid://10507208348",5.6)
 
 wait(0.3)
 
@@ -14,6 +13,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScr
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/Greenville/GVAUTOWASH.lua"))()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/HexerMaster1929/MyScripts/main/Greenville/GVSPEEDMOD.lua"))()
 
-HexNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loaded, Enjoy!","rbxassetid://10507208390","9067086414")
+Lib:MakeNotification("Greenville Script","Autowash,Autofuel,SpeedMod Loaded, Enjoy!","rbxassetid://10507208390",5.6)
 
 
