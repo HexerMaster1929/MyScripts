@@ -355,7 +355,7 @@ function Lib.CreateWindow(WindowName,IntroTitle,IntroIcon,IntroDesc,LoaderTime)
 		
 		local library_window = Instance.new("Frame")
 		library_window.BackgroundColor3 = Color3.new(0.243137, 0.243137, 0.243137)
-		library_window.Position = UDim2.new(0.257142842, 0, 0.227866516, 0)
+		library_window.Position = UDim2.new(0.5, 0, 0.5, 0)
 		library_window.Size = UDim2.new(0, 567, 0, 345)
 		library_window.Name = "LibraryWindow"
 	library_window.Parent = hexavate_ui
@@ -567,7 +567,8 @@ function Lib.HideUI()
 		tab.BackgroundTransparency = 0.9900000095367432
 		tab.BorderColor3 = Color3.new(0.188235, 0.188235, 0.188235)
 		tab.BorderMode = Enum.BorderMode.Inset
-		tab.Position = UDim2.new(0.252000064, 0, 0.13385956, 0)
+		tab.Position = UDim2.new(1.3, 0, 0.13385956, 0)
+		if not library_window:FindFirstChild("Tab") then tab.Position = UDim2.new(0.252000064, 0, 0.13385956, 0) end
 		tab.Size = UDim2.new(0, 397, 0, 276)
 		tab.Name = "Tab"
 		tab.Parent = library_window
@@ -622,7 +623,7 @@ function Lib.HideUI()
 			local cS = TabUILIST.AbsoluteContentSize
 
 			game.TweenService:Create(tab, TweenInfo.new(0.15, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-				CanvasSize = UDim2.new(0,0,0,cS.Y + 10)
+				CanvasSize = UDim2.new(0,0,0,cS.Y + 50)
 			}):Play()
 		end
 
@@ -634,16 +635,29 @@ function Lib.HideUI()
 
 					print("Attempted To Close A Non Closeable Item (Normal Error)")
 				else
+					if tab.Position == UDim2.new(0.252000064, 0, 0.13385956, 0) then return end
 					if v.Name == "Tab" then
-						v.Visible = false
+						game.TweenService:Create(v, 
+
+							TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+							{Position = UDim2.new(1.2, 0, 0.13385956, 0),}):Play()
+						wait(0.2)
 						
 end
 				end
 
 
 			end
+			wait(.2)
+			
+			
+			game.TweenService:Create(tab, 
 
-		tab.Visible = true
+				TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+				{Position = UDim2.new(0.252000064, 0, 0.13385956, 0),}):Play()
+			
 		end)
 
 			local Elements = {}
@@ -1051,12 +1065,21 @@ end
 		function Elements:NewDropDown(DropDownTitle,Table,callback)
 			callback = callback or function() end
 			
+			local dropdown = Instance.new("Frame")
+			dropdown.AnchorPoint = Vector2.new(0.5, 0)
+			dropdown.BackgroundColor3 = Color3.new(1, 1, 1)
+			dropdown.BackgroundTransparency = 1
+			dropdown.Position = UDim2.new(0.561389983, 0, 0.825834513, 0)
+			dropdown.Size = UDim2.new(0, 354, 0, 47)
+			dropdown.Name = "DropDown"
+			dropdown.Parent = tab
+			
 			local drop = Instance.new("Frame")
 			drop.BackgroundColor3 = Color3.new(0.301961, 0.301961, 0.301961)
-			drop.Position = UDim2.new(0.257005513, 0, 0.759847462, 0)
+			drop.Position = UDim2.new(-0, 0,-0.005, 0)
 			drop.Size = UDim2.new(0, 354, 0, 47)
 			drop.Name = "Drop"
-			drop.Parent = tab
+			drop.Parent = dropdown
 
 			local uicorner = Instance.new("UICorner")
 			uicorner.CornerRadius = UDim.new(0, 7)
@@ -1219,6 +1242,12 @@ end
 
 				DropBTN.MouseButton1Down:Connect(function()
 					callback(v)
+					
+					game.TweenService:Create(dropdown, 
+
+						TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+						{Size = UDim2.new(0, 354, 0, 47),}):Play()
 					game.TweenService:Create(drop_frame, 
 
 						TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
@@ -1246,6 +1275,13 @@ end
 				--print("watafak")
 				if DropOpen then
 					DropOpen = false
+					
+					game.TweenService:Create(dropdown, 
+
+						TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+						{Size = UDim2.new(0, 354, 0, 47),}):Play()
+					
 					game.TweenService:Create(drop_frame, 
 
 						TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
@@ -1270,6 +1306,12 @@ end
 
 						{Rotation = -90,}):Play()
 					
+					game.TweenService:Create(dropdown, 
+
+						TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+						{Size = UDim2.new(0,354,0,166),}):Play()
+					
 					game.TweenService:Create(drop_frame, 
 
 						TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
@@ -1288,11 +1330,207 @@ end
 			UpdateTabSize()
 		end
 		
-		function Elements:aaa(ButtonTitle,ButtonText,callback)
+		function Elements:NewKeybind(KeybindTitle,DefKeybind,callback)
+			callback = callback or function() end
+			
+			local key_bind = Instance.new("Frame")
+			key_bind.BackgroundColor3 = Color3.new(0.301961, 0.301961, 0.301961)
+			key_bind.Position = UDim2.new(0.508742929, 0, 0.608904064, 0)
+			key_bind.Size = UDim2.new(0, 354, 0, 47)
+			key_bind.Name = "KeyBind"
+			key_bind.Parent = tab
+
+			local uicorner = Instance.new("UICorner")
+			uicorner.CornerRadius = UDim.new(0, 7)
+			uicorner.Parent = key_bind
+
+			local uistroke = Instance.new("UIStroke")
+			uistroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+			uistroke.Parent = key_bind
+			uistroke.Transparency = 0.6
+
+			local title = Instance.new("TextLabel")
+			title.Font = Enum.Font.GothamMedium
+			title.Text = "Keybind Title"
+			title.TextColor3 = Color3.new(1, 1, 1)
+			title.TextScaled = true
+			title.TextSize = 14
+			title.TextWrapped = true
+			title.AnchorPoint = Vector2.new(0, 0.5)
+			title.BackgroundColor3 = Color3.new(1, 1, 1)
+			title.BackgroundTransparency = 1
+			title.Position = UDim2.new(0.022050932, 0, 0.504042625, 0)
+			title.Size = UDim2.new(0, 245,0, 28)
+			title.Name = "Title"
+			title.Parent = key_bind
+
+			local drop_button = Instance.new("Frame")
+			drop_button.BackgroundColor3 = Color3.new(0.301961, 0.301961, 0.301961)
+			drop_button.Position = UDim2.new(0.966, 0,0.497, 0)
+			drop_button.Size = UDim2.new(0, 75, 0, 30)
+			drop_button.Name = "DropButton"
+			drop_button.Parent = key_bind
+			drop_button.AnchorPoint = Vector2.new(1, 0.5)
+
+			local uicorner_2 = Instance.new("UICorner")
+			uicorner_2.CornerRadius = UDim.new(0, 7)
+			uicorner_2.Parent = drop_button
+
+			local uistroke_2 = Instance.new("UIStroke")
+			uistroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+			uistroke_2.Parent = drop_button
+			uistroke_2.Transparency = .6
+
+			local awaiting_key = Instance.new("TextLabel")
+			awaiting_key.Font = Enum.Font.GothamMedium
+			awaiting_key.Text = "Select A Key..."
+			awaiting_key.TextColor3 = Color3.new(1, 1, 1)
+			awaiting_key.TextScaled = true
+			awaiting_key.TextSize = 14
+			awaiting_key.TextWrapped = true
+			awaiting_key.AnchorPoint = Vector2.new(0.5, 0)
+			awaiting_key.BackgroundColor3 = Color3.new(1, 1, 1)
+			awaiting_key.BackgroundTransparency = 1
+			awaiting_key.Position = UDim2.new(0.608564079, 0, 0.166666672, 0)
+			awaiting_key.Size = UDim2.new(0, 111, 0, 20)
+			awaiting_key.Name = "AwaitingKey"
+			awaiting_key.Parent = drop_button
+			awaiting_key.TextTransparency = 1
+
+			local keyboard = Instance.new("ImageLabel")
+			keyboard.Image = "rbxassetid://3926305904"
+			keyboard.ImageRectOffset = Vector2.new(724, 444)
+			keyboard.ImageRectSize = Vector2.new(36, 36)
+			keyboard.AnchorPoint = Vector2.new(0, 0.5)
+			keyboard.BackgroundColor3 = Color3.new(1, 1, 1)
+			keyboard.BackgroundTransparency = 1
+			keyboard.Position = UDim2.new(0.0398304984, 0, 0.5, 0)
+			keyboard.Size = UDim2.new(0, 28, 0, 28)
+			keyboard.Name = "Keyboard"
+			keyboard.Parent = drop_button
+
+			local key = Instance.new("TextLabel")
+			key.Font = Enum.Font.GothamMedium
+			key.TextColor3 = Color3.new(1, 1, 1)
+			key.TextScaled = true
+			key.TextSize = 14
+			key.TextWrapped = true
+			key.AnchorPoint = Vector2.new(0.5, 0)
+			key.BackgroundColor3 = Color3.new(1, 1, 1)
+			key.BackgroundTransparency = 1
+			key.Position = UDim2.new(0.703487158, 0, 0.0778067112, 0)
+			key.Size = UDim2.new(0, 27, 0, 26)
+			key.Name = "Key"
+			key.Parent = drop_button
+
+			local kbclick = Instance.new("TextButton")
+			kbclick.Font = Enum.Font.SourceSans
+			kbclick.Text = ""
+			kbclick.TextColor3 = Color3.new(0, 0, 0)
+			kbclick.TextSize = 14
+			kbclick.AnchorPoint = Vector2.new(1, 0.5)
+			kbclick.BackgroundColor3 = Color3.new(1, 1, 1)
+			kbclick.BackgroundTransparency = 1
+			kbclick.Position = UDim2.new(1.01333416, 0, 0.5, 0)
+			kbclick.Size = UDim2.new(0, 74, 0, 29)
+			kbclick.Name = "KBClick"
+			kbclick.Parent = drop_button
+			
+			local CurrentKeyBind = DefKeybind
+			local AwaitingKeyCodeInput = false
+			
+			key.Text = UIS:GetStringForKeyCode(DefKeybind)
+
+			
+			kbclick.MouseButton1Down:Connect(function()
+				
+				
+
+				if AwaitingKeyCodeInput == false then 
+					
+					key.Visible = false
+				game.TweenService:Create(drop_button, 
+
+					TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+					{Size = UDim2.new(0,164,0,30),}):Play()
+				
+				game.TweenService:Create(title, 
+
+					TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+					{Size = UDim2.new(0,141,0,28),}):Play()
+				wait(.6)
+				game.TweenService:Create(awaiting_key, 
+
+					TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), 
+
+					{TextTransparency = 0,}):Play()
+					
+					game.TweenService:Create(key, 
+
+						TweenInfo.new(0.01, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), 
+
+						{TextTransparency = 1,}):Play()
+				AwaitingKeyCodeInput = true
+				end
+				end)
+
+				UIS.InputBegan:Connect(function(Input)
+					if AwaitingKeyCodeInput == true then
+						if Input.KeyCode ~= Enum.KeyCode.Unknown then
+							CurrentKeyBind = Input.KeyCode
+							key.Text = UIS:GetStringForKeyCode(Input.KeyCode)
+						AwaitingKeyCodeInput = false
+						
+						game.TweenService:Create(awaiting_key, 
+
+							TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), 
+
+							{TextTransparency = 1,}):Play()
+						
+						wait(.2)
+						
+						game.TweenService:Create(drop_button, 
+
+							TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+							{Size = UDim2.new(0,75,0,30),}):Play()
+
+						game.TweenService:Create(title, 
+
+							TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+							{Size = UDim2.new(0,245,0,28),}):Play()
+						
+						
+						wait(.2)
+						key.Visible = true
+						game.TweenService:Create(key, 
+
+							TweenInfo.new(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), 
+
+							{TextTransparency = 0,}):Play()
+						
+						end
+					end
+
+					if Input.KeyCode == CurrentKeyBind then
+						callback(CurrentKeyBind)
+					end
+
+				
+			end)
+			
+			
+			UpdateTabSize()
+		end
+		
+		--[[function Elements:aaa(ButtonTitle,ButtonText,callback)
 			callback = callback or function() end
 
 			UpdateTabSize()
-		end
+		end]]--
 
 			
 			return Elements
@@ -1302,3 +1540,4 @@ end
 
 end
 return Lib
+
