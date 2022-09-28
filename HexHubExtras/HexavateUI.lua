@@ -16,6 +16,8 @@ function FixStrokes(Parent)
 	end
 end]]--
 
+
+
 local UIS = game:GetService("UserInputService")
 function drag (Frame)
 	local dragToggle = nil
@@ -358,6 +360,7 @@ function Lib.CreateWindow(WindowName,IntroTitle,IntroIcon,IntroDesc,LoaderTime)
 		library_window.Name = "LibraryWindow"
 	library_window.Parent = hexavate_ui
 	library_window.ClipsDescendants = true
+	library_window.AnchorPoint = Vector2.new(0.5,0.5)
 
 		local uicorner = Instance.new("UICorner")
 		uicorner.CornerRadius = UDim.new(0, 7)
@@ -472,22 +475,86 @@ function Lib.CreateWindow(WindowName,IntroTitle,IntroIcon,IntroDesc,LoaderTime)
 		drag(library_window)
 		Lib:MakeNotification("Hexavate","Hexavate UI Loaded, Thanks For Choosing A HexHub Product.","11091925001",2.6)
 	
+function Lib.DestroyUI()
+		game.TweenService:Create(library_window, 
+
+			TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+			{Position = UDim2.new(1.5,0,0.5,0),}):Play()
 		
-
-
-
-
+		wait(1)
 		
-	
-	
-	function Lib.DestroyUI()
+		hexavate_ui:Destroy()
+end
+
+function Lib.HideUI()
+		game.TweenService:Create(library_window, 
+
+			TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+			{Position = UDim2.new(1.5,0,0.5,0),}):Play()
+		
+		local minimized_button = Instance.new("Frame")
+		minimized_button.AnchorPoint = Vector2.new(0.5, 0.5)
+		minimized_button.BackgroundColor3 = Color3.new(0.243137, 0.243137, 0.243137)
+		minimized_button.Position = UDim2.new(1.3, 0, 1.3, 0)
+		minimized_button.Size = UDim2.new(0, 137, 0, 138)
+		minimized_button.Name = "MinimizedButton"
+		minimized_button.Parent = hexavate_ui
+
+		local uicorner = Instance.new("UICorner")
+		uicorner.CornerRadius = UDim.new(100, 100)
+		uicorner.Parent = minimized_button
+
+		local uistroke = Instance.new("UIStroke")
+		uistroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+		uistroke.Parent = minimized_button
+		uistroke.Transparency = 0.5
+
+		local open_button = Instance.new("TextButton")
+		open_button.Font = Enum.Font.Gotham
+		open_button.Text = "H"
+		open_button.TextColor3 = Color3.new(1, 1, 1)
+		open_button.TextSize = 31
+		open_button.BackgroundColor3 = Color3.new(0.34902, 0.34902, 0.34902)
+		open_button.Position = UDim2.new(0.197080374, 0, 0.173913002, 0)
+		open_button.Size = UDim2.new(0, 32, 0, 38)
+		open_button.Name = "OpenButton"
+		open_button.Parent = minimized_button
+
+		local uicorner_2 = Instance.new("UICorner")
+		uicorner_2.CornerRadius = UDim.new(0, 7)
+		uicorner_2.Parent = open_button
+
+		local uistroke_2 = Instance.new("UIStroke")
+		uistroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+		uistroke_2.Parent = open_button
+		uistroke_2.Transparency = 0.6
+		
+		game.TweenService:Create(minimized_button, 
+
+			TweenInfo.new(1.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+			{Position = UDim2.new(1,0,1,0),}):Play()
+		
+		open_button.MouseButton1Down:Connect(function()
+			game.TweenService:Create(minimized_button, 
+
+				TweenInfo.new(1.2, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+				{Position = UDim2.new(1.3,0,1.3,0),}):Play()
+			
+			game.TweenService:Create(library_window, 
+
+				TweenInfo.new(0.6, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), 
+
+				{Position = UDim2.new(0.5,0,0.5,0),}):Play()
+			
+			minimized_button:Destroy()
+		end)
 		
 	end
 	
-	function Lib.HideUI()
-		
-	end
-
 	local Tabs = {}
 
 	function Tabs:NewTab(TabName)
