@@ -5,9 +5,9 @@ local Succ,Err = pcall(function()
 		error("TextChat Chatsystem Not Supported By OKChat Bar")
 	end
 
-print("Loading chat module")
-		
-		 game.StarterGui:SetCoreGuiEnabled("Chat",false)
+	print("Loading chat module")
+	
+	game.StarterGui:SetCoreGuiEnabled("Chat",false)
 
 	local wfc			=game.WaitForChild
 	local ffc			=game.FindFirstChild
@@ -656,6 +656,24 @@ print("Loading chat module")
 		Tag = "",
 
 	})
+	
+	local RunService = game:GetService("RunService")
+	local CoreGui = game.CoreGui
+	
+	if not RunService:IsStudio() then
+		if gethui then
+			chatgui.Parent = gethui()
+		elseif syn.protect_gui then 
+			syn.protect_gui(chatgui)
+			chatgui.Parent = CoreGui
+		elseif CoreGui:FindFirstChild("RobloxGui") then
+			chatgui.Parent = CoreGui:FindFirstChild("RobloxGui")
+		else
+			chatgui.Parent = CoreGui
+		end
+	else
+		chatgui.Parent = game.Players.LocalPlayer.PlayerGui
+	end
 	
 
 end)
