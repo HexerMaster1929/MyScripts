@@ -6,6 +6,8 @@ local Succ,Err = pcall(function()
 	end
 
 print("Loading chat module")
+		
+		game.StarterGui:SetCoreGuiEnabled("Chat",false)
 
 	local wfc			=game.WaitForChild
 	local ffc			=game.FindFirstChild
